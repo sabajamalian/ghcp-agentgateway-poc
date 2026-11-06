@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=https://agentgateway.dev/schema/config
+#
+# agentgateway as an authenticated HTTP CONNECT egress proxy for GitHub Copilot.
+# TLS is NOT terminated: Copilot clients talk end to end to GitHub, using each
+# user's own Copilot seat and GitHub-managed models. The proxy only decides
+# who may use it (basic auth) and which hostnames they may reach (allowlist).
+config:
+  storage:
+    mode: file
+frontendPolicies:
+  connect:
+    mode: route
+gateways:
+  copilot-egress:
+    port: 3128
+    basicAuth:
+      htpasswd:
+        file: /secrets/htpasswd
+      mode: strict
+      realm: copilot-egress
+      authorizationLocation:
+        header:
+          name: proxy-authorization
+          prefix: "Basic "
+  # Caddy alone reaches this listener and authenticates all UI/API requests.
+  ui-gateway:
+    port: 4001
+    bindAddress: 127.0.0.1
+ui:
+  gateways: [ui-gateway]
+routes:
+# Copilot on GitHub.com: auth, user management, telemetry, completions.
+# Source: https://docs.github.com/en/copilot/reference/copilot-allowlist-reference
+- name: github-core
+  gateways: [copilot-egress]
+  hostnames:
+  - github.com
+  - "*.github.com"
+  - "*.githubusercontent.com"
+  - "*.githubassets.com"
+  - default.exp-tas.com
+  backends:
+  - dynamic: {}
+# Personal-plan and generic Copilot endpoints are intentionally absent.
+- name: copilot-corporate-plans
+  gateways: [copilot-egress]
+  hostnames:
+  - "*.business.githubcopilot.com"
+  - "*.enterprise.githubcopilot.com"
+  backends:
+  - dynamic: {}
+# Source: https://code.visualstudio.com/docs/setup/network
+- name: vscode-support
+  gateways: [copilot-egress]
+  hostnames:
+  - update.code.visualstudio.com
+  - "*.vo.msecnd.net"
+  - marketplace.visualstudio.com
+  - "*.gallery.vsassets.io"
+  - "*.gallerycdn.vsassets.io"
+  - "*.vscode-cdn.net"
+  - "*.vscode-unpkg.net"
+  - vscode.download.prss.microsoft.com
+  - vscode.dev
+  - "*.vscode.dev"
+  - mobile.events.data.microsoft.com
+  backends:
+  - dynamic: {}

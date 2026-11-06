@@ -1,0 +1,21 @@
+{
+	admin off
+	auto_https off
+}
+
+https://{$UI_HOST} {
+	tls /etc/caddy/ui-origin.crt /etc/caddy/ui-origin.key
+
+	basic_auth {
+		{$UI_USER} {$UI_PASSWORD_HASH}
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		-Server
+	}
+
+	reverse_proxy 127.0.0.1:4001
+}

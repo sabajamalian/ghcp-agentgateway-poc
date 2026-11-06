@@ -1,0 +1,363 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "GitHub Copilot",
+  "elements": [
+    {
+      "id": "boundary",
+      "type": "rectangle",
+      "x": 340,
+      "y": 40,
+      "width": 370,
+      "height": 510,
+      "strokeColor": "#6B7B6E",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 30,
+      "y": -50,
+      "width": 1500,
+      "height": 70,
+      "text": "Copilot: inspect the request path, keep the provider choice",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "strokeColor": "#000000"
+    },
+    {
+      "id": "client",
+      "type": "rectangle",
+      "x": 30,
+      "y": 100,
+      "width": 250,
+      "height": 140,
+      "strokeColor": "#15181B",
+      "backgroundColor": "#F4EFE6",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "id": "client-label",
+      "type": "text",
+      "x": 45,
+      "y": 120,
+      "width": 220,
+      "height": 120,
+      "text": "Copilot CLI /\ndesktop local\nsession",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "strokeColor": "#000000",
+      "textAlign": "left",
+      "verticalAlign": "top"
+    },
+    {
+      "id": "proxy",
+      "type": "rectangle",
+      "x": 370,
+      "y": 100,
+      "width": 310,
+      "height": 140,
+      "strokeColor": "#15181B",
+      "backgroundColor": "#F4EFE6",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "id": "proxy-label",
+      "type": "text",
+      "x": 385,
+      "y": 120,
+      "width": 280,
+      "height": 120,
+      "text": "Agentgateway\nCONNECT or\ninspection",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "strokeColor": "#000000",
+      "textAlign": "left",
+      "verticalAlign": "top"
+    },
+    {
+      "id": "github",
+      "type": "rectangle",
+      "x": 800,
+      "y": 100,
+      "width": 270,
+      "height": 140,
+      "strokeColor": "#15181B",
+      "backgroundColor": "#F4EFE6",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "id": "github-label",
+      "type": "text",
+      "x": 815,
+      "y": 120,
+      "width": 240,
+      "height": 120,
+      "text": "GitHub\nCopilot API",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "strokeColor": "#000000",
+      "textAlign": "left",
+      "verticalAlign": "top"
+    },
+    {
+      "id": "managed",
+      "type": "rectangle",
+      "x": 1170,
+      "y": 100,
+      "width": 270,
+      "height": 140,
+      "strokeColor": "#15181B",
+      "backgroundColor": "#F4EFE6",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "id": "managed-label",
+      "type": "text",
+      "x": 1185,
+      "y": 120,
+      "width": 240,
+      "height": 120,
+      "text": "GitHub-managed\nmodels",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "strokeColor": "#000000",
+      "textAlign": "left",
+      "verticalAlign": "top"
+    },
+    {
+      "id": "byok",
+      "type": "rectangle",
+      "x": 370,
+      "y": 370,
+      "width": 310,
+      "height": 140,
+      "strokeColor": "#E0922F",
+      "backgroundColor": "#F4EFE6",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "id": "byok-label",
+      "type": "text",
+      "x": 385,
+      "y": 390,
+      "width": 280,
+      "height": 120,
+      "text": "Agentgateway\nBYOK model API",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "strokeColor": "#000000",
+      "textAlign": "left",
+      "verticalAlign": "top"
+    },
+    {
+      "id": "foundry",
+      "type": "rectangle",
+      "x": 800,
+      "y": 370,
+      "width": 270,
+      "height": 140,
+      "strokeColor": "#15181B",
+      "backgroundColor": "#F4EFE6",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "id": "foundry-label",
+      "type": "text",
+      "x": 815,
+      "y": 390,
+      "width": 240,
+      "height": 120,
+      "text": "Microsoft\nFoundry",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "strokeColor": "#000000",
+      "textAlign": "left",
+      "verticalAlign": "top"
+    },
+    {
+      "id": "client-proxy",
+      "type": "arrow",
+      "x": 280,
+      "y": 170,
+      "width": 90,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          90,
+          0
+        ]
+      ],
+      "strokeColor": "#6B7B6E",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "proxy-github",
+      "type": "arrow",
+      "x": 680,
+      "y": 170,
+      "width": 120,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          0
+        ]
+      ],
+      "strokeColor": "#6B7B6E",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "github-managed",
+      "type": "arrow",
+      "x": 1070,
+      "y": 170,
+      "width": 100,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          100,
+          0
+        ]
+      ],
+      "strokeColor": "#6B7B6E",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "github-byok",
+      "type": "arrow",
+      "x": 935,
+      "y": 240,
+      "width": 250,
+      "height": 180,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -250,
+          180
+        ]
+      ],
+      "strokeColor": "#6B7B6E",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "byok-foundry",
+      "type": "arrow",
+      "x": 680,
+      "y": 440,
+      "width": 120,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          0
+        ]
+      ],
+      "strokeColor": "#6B7B6E",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "client-byok",
+      "type": "arrow",
+      "x": 155,
+      "y": 240,
+      "width": 210,
+      "height": 180,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          210,
+          180
+        ]
+      ],
+      "strokeColor": "#6B7B6E",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "enterprise-label",
+      "type": "text",
+      "x": 720,
+      "y": 265,
+      "width": 500,
+      "height": 120,
+      "text": "Enterprise BYOK:\nGitHub calls gateway",
+      "fontSize": 18,
+      "fontFamily": 3,
+      "strokeColor": "#000000"
+    },
+    {
+      "id": "user-label",
+      "type": "text",
+      "x": 30,
+      "y": 325,
+      "width": 500,
+      "height": 120,
+      "text": "User BYOK:\ndirect client path",
+      "fontSize": 18,
+      "fontFamily": 3,
+      "strokeColor": "#000000"
+    },
+    {
+      "id": "boundary-label",
+      "type": "text",
+      "x": 355,
+      "y": 560,
+      "width": 500,
+      "height": 120,
+      "text": "Separate listeners,\ncredentials and logs",
+      "fontSize": 18,
+      "fontFamily": 3,
+      "strokeColor": "#000000"
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#F4EFE6"
+  }
+}

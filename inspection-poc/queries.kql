@@ -1,0 +1,51 @@
+// Run each query independently.
+// Per-exchange view, including requests that do not carry a model.
+CopilotModel_CL
+| where TimeGenerated > ago(24h)
+| project TimeGenerated,
+          Client = tostring(Metadata.client),
+          Method = tostring(Metadata.method),
+          Path = tostring(Metadata.path),
+          RequestedModel = tostring(Metadata.requested_model_raw),
+          ResponseModel = tostring(Metadata.response_model_raw),
+          CaptureStatus = tostring(Metadata.model_capture_status),
+          ModelSource = tostring(Metadata.model_source),
+          HttpStatus = toint(Metadata.status),
+          Encoding = tostring(Metadata.content_encoding),
+          ExchangeId = tostring(Metadata.exchange_id),
+          RunId = tostring(Metadata.run_id)
+| order by TimeGenerated desc
+
+// Inference summary: excludes session/control requests and GET probes.
+// Change the client and window for your experiment.
+let TargetClient = "desktop";
+let Lookback = 24h;
+CopilotModel_CL
+| where TimeGenerated > ago(Lookback)
+| where tostring(Metadata.client) == TargetClient
+| extend ExchangeId = tostring(Metadata.exchange_id)
+| summarize arg_max(TimeGenerated, Metadata) by ExchangeId
+| where tostring(Metadata.method) == "POST"
+    and tostring(Metadata.path) in ("/responses", "/chat/completions", "/v1/messages")
+| summarize Exchanges = count(),
+            Captured = countif(tostring(Metadata.model_capture_status) == "captured"),
+            SuccessfulResponses = countif(toint(Metadata.status) between (200 .. 299)),
+            RequestedModels = make_set(tostring(Metadata.requested_model_raw))
+  by Path = tostring(Metadata.path)
+| extend CapturePercent = round(100.0 * Captured / Exchanges, 1)
+
+// Per-run view. Harness labels are not authenticated user identity.
+let TargetRunId = "paste-your-run-id";
+CopilotModel_CL
+| where tostring(Metadata.run_id) == TargetRunId
+| extend ExchangeId = tostring(Metadata.exchange_id)
+| summarize arg_max(TimeGenerated, Metadata) by ExchangeId
+| project TimeGenerated, ExchangeId,
+          Client = tostring(Metadata.client),
+          Method = tostring(Metadata.method),
+          Path = tostring(Metadata.path),
+          RequestedModel = tostring(Metadata.requested_model_raw),
+          ResponseModel = tostring(Metadata.response_model_raw),
+          CaptureStatus = tostring(Metadata.model_capture_status),
+          HttpStatus = toint(Metadata.status)
+| order by TimeGenerated asc

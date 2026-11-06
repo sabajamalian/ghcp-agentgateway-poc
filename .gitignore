@@ -1,0 +1,14 @@
+.secrets/
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.srl
+*.bicep.json
+*.log
