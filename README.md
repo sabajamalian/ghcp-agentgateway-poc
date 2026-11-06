@@ -31,24 +31,19 @@ An ordinary CONNECT tunnel keeps TLS end to end with GitHub. Enabling the gatewa
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    client["Copilot CLI / desktop local session"] -->|"CONNECT, optionally inspected"| managed
-    subgraph boundary["Enterprise gateway boundary"]
-        managed["Agentgateway: Copilot egress"]
-        byok["Agentgateway: authenticated model API"]
-    end
-    managed --> github["GitHub Copilot API"]
-    github --> hosted["GitHub-managed models"]
-    github -->|"Enterprise BYOK"| byok
-    client -.->|"User-configured BYOK"| byok
-    byok --> foundry["Microsoft Foundry"]
-    managed -.-> logs["Model metadata / access logs"]
-    byok -.-> logs
-    style boundary fill:transparent,stroke:#6B7B6E
-    style managed fill:#F4EFE6,stroke:#15181B,color:#15181B
-    style byok fill:#F4EFE6,stroke:#E0922F,color:#15181B
-```
+Each diagram is an editable draw.io PNG: open it in [draw.io](https://www.drawio.com/) to change it.
+
+### Option 1: GitHub-managed models
+
+![GitHub-managed models through Agentgateway, with a CONNECT proxy and a selective inspection pilot](docs/diagrams/option-1-github-managed.drawio.png)
+
+### Option 2: Microsoft Foundry models through BYOK
+
+![Foundry models through an authenticated Agentgateway model API, for enterprise-managed and user-configured BYOK](docs/diagrams/option-2-foundry-byok.drawio.png)
+
+### Option 3: Hybrid
+
+![GitHub-managed and Foundry models side by side behind the enterprise gateway](docs/diagrams/option-3-hybrid.drawio.png)
 
 The public deployment scripts keep the CONNECT proxy, inspection pilot, and BYOK API in separate resource groups. This isolates credentials and trust changes. Agentgateway can host multiple listeners, but these scripts do not merge deployments or provide a shared configuration control plane.
 
@@ -112,4 +107,4 @@ Operational checks and fixture tests are described in the runbooks. [Operations]
 
 Product behavior is linked to official documentation in [references](docs/references.md). Gateway implementation details are pinned to the release used by this repository. Client model catalogs and enterprise-preview behavior can change independently of that pin.
 
-Repository code is [MIT-licensed](LICENSE). Upstream tools retain their own licenses.
+Repository code is [MIT-licensed](LICENSE). Upstream tools retain their own licenses. Product names and logos in the diagrams belong to their respective owners.
